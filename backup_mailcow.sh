@@ -27,5 +27,6 @@ lastbackup=$(ssh $remoteuser@$mailcowserver ls -tr $mailcowbackupdir | tail -1 2
 # Test if last backup is not empty string
 [ -z "$lastbackup"  ] &&  { echo "Cannot find Last backup, check variables and backup and check if user can log in."; exit 1; } ||
 # copy remote backup to local backup
+# on FreeBSD use scp -C (to get compression) or avz with -A -no-perms
         rsync -av "$remoteuser"@"$mailcowserver":"$mailcowbackupdir"/"$lastbackup" "$backuplocation"
 
