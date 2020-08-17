@@ -26,6 +26,6 @@ lastbackup=$(ssh $remoteuser@$mailcowserver ls -tr $mailcowbackupdir | tail -1 2
 
 # Test if last backup is not empty string
 [ -z "$lastbackup"  ] &&  { echo "Cannot find Last backup, check variables and backup and check if user can log in."; exit 1; } ||
-# scp remote backup to local backup
+# copy remote backup to local backup
         rsync -av "$remoteuser"@"$mailcowserver":"$mailcowbackupdir"/"$lastbackup" "$backuplocation"
 
